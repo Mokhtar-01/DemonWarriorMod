@@ -1,0 +1,29 @@
+plugins {
+    id 'java'
+}
+
+group   = 'demonwarrior'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    flatDir { dirs 'lib', 'lib/mods' }
+}
+
+dependencies {
+    compileOnly fileTree(dir: 'lib',      include: ['desktop-1.0.jar'])
+    compileOnly fileTree(dir: 'lib/mods', include: ['ModTheSpire.jar', 'BaseMod.jar'])
+    compileOnly 'org.apache.logging.log4j:log4j-api:2.17.1'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+jar {
+    archiveFileName = 'DemonWarrior.jar'
+    from sourceSets.main.output
+    from(sourceSets.main.resources.srcDirs)
+}
+Commit.
