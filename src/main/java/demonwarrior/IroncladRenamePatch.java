@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
 public class IroncladRenamePatch {
 
     private static final Logger logger = LogManager.getLogger(IroncladRenamePatch.class);
-    public static final String NEW_NAME       = "Demon Warrior";
+    public static final String NEW_NAME = "Demon Warrior";
     public static final String NEW_NAME_UPPER = "DEMON WARRIOR";
 
     public static void renameIronclad() {
@@ -65,5 +65,3 @@ public class IroncladRenamePatch {
             return NEW_NAME_UPPER;
         }
     }
-}
-Commit.
