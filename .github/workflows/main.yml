@@ -1,42 +1,29 @@
 name: Build DemonWarrior JAR
-
 on: [push]
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Set up Java 8
-        uses: actions/setup-java@v4
+      - uses: actions/setup-java@v4
         with:
           java-version: '8'
           distribution: 'temurin'
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-
-      - name: Download ModTheSpire
+      - name: Download dependencies
         run: |
           mkdir -p lib/mods
           curl -L "https://github.com/kiooeht/ModTheSpire/releases/download/v3.23.1/ModTheSpire.jar" -o lib/mods/ModTheSpire.jar
-
-      - name: Download BaseMod
-        run: |
           curl -L "https://github.com/daviscook477/BaseMod/releases/download/5.43.0/BaseMod.jar" -o lib/mods/BaseMod.jar
-
-      - name: Download STS desktop JAR
-        run: |
           curl -L "https://github.com/boardengineer/slay-the-spire-mods/raw/master/lib/desktop-1.0.jar" -o lib/desktop-1.0.jar
 
       - name: Build JAR
-        run: ./gradlew jar
+        run: |
+          chmod +x gradlew
+          ./gradlew jar
 
-      - name: Upload JAR
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: DemonWarrior
           path: build/libs/DemonWarrior.jar
