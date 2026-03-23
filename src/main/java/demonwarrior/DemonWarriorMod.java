@@ -29,4 +29,3 @@ public class DemonWarriorMod implements PostInitializeSubscriber, EditStringsSub
     @Override
     public void receiveEditStrings() {}
 }
-Commit.
