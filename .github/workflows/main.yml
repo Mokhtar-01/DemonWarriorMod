@@ -15,18 +15,33 @@ jobs:
         run: |
           wget -q https://services.gradle.org/distributions/gradle-7.6-bin.zip
           unzip -q gradle-7.6-bin.zip
-          export PATH=$PWD/gradle-7.6/bin:$PATH
-          echo "GRADLE=$PWD/gradle-7.6/bin/gradle" >> $GITHUB_ENV
+          echo "$PWD/gradle-7.6/bin" >> $GITHUB_PATH
 
-      - name: Download dependencies
+      - name: Download ModTheSpire
         run: |
           mkdir -p lib/mods
           curl -L "https://github.com/kiooeht/ModTheSpire/releases/download/v3.23.1/ModTheSpire.jar" -o lib/mods/ModTheSpire.jar
+          ls -lh lib/mods/ModTheSpire.jar
+
+      - name: Download BaseMod
+        run: |
           curl -L "https://github.com/daviscook477/BaseMod/releases/download/5.43.0/BaseMod.jar" -o lib/mods/BaseMod.jar
-          curl -L "https://github.com/boardengineer/slay-the-spire-mods/raw/master/lib/desktop-1.0.jar" -o lib/desktop-1.0.jar
+          ls -lh lib/mods/BaseMod.jar
+
+      - name: Download STS JAR
+        run: |
+          curl -L "https://github.com/GraysonnG/InkArsenal/raw/master/lib/desktop-1.0.jar" -o lib/desktop-1.0.jar
+          ls -lh lib/desktop-1.0.jar
+
+      - name: Check JAR sizes
+        run: |
+          echo "Checking all JARs are valid..."
+          unzip -t lib/desktop-1.0.jar | tail -1
+          unzip -t lib/mods/ModTheSpire.jar | tail -1
+          unzip -t lib/mods/BaseMod.jar | tail -1
 
       - name: Build JAR
-        run: $GRADLE jar
+        run: gradle jar
 
       - uses: actions/upload-artifact@v4
         with:
