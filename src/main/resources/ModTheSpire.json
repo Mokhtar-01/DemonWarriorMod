@@ -1,0 +1,10 @@
+{
+  "modid":       "demonwarrior",
+  "name":        "Demon Warrior",
+  "author_list": ["Me"],
+  "description": "Renames the Ironclad to Demon Warrior.",
+  "version":     "1.0.0",
+  "sts_version": "01-27-2020",
+  "mts_version": "3.23.1",
+  "dependencies": ["basemod"]
+}
